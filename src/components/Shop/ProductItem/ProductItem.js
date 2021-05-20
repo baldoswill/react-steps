@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import classes from './ProductItem.module.css';
 import {cartActions} from '../../../redux/reducers/cart-reducer';
 import {useDispatch} from 'react-redux';
+import Item from '../../General/Item/Item';
 
 export default function ProductItem(props) {
 
@@ -9,7 +9,6 @@ export default function ProductItem(props) {
     let [color, setColor] = useState(props.colors[0]);
     const dispatch = useDispatch()
  
-    
 
     const sizeHandler = (sizeParam) => {
         setSize(sizeParam)
@@ -24,40 +23,16 @@ export default function ProductItem(props) {
     }
  
     return (
-        <div className={classes.productItem}>           
-            <img srcSet= {'assets/img/' + props.images[color]} className={classes.productImage} />
-            <div className={classes.productInformation}>
-                <h4 className={classes.productTitle}>{props.title}</h4>
-                <div className={classes.productInfoWrapper}>
-                    <div className={classes.productSubtitles}>
-                        <p className={classes.productSubtitle}>SIZE: </p>
-                        <p className={classes.productSubtitle}>COLOR: </p>
-                        <p className={classes.productSubtitle}>PRICE: </p>
-                    </div>
-                    <div className={classes.productVariations}>
-                        <ul className={classes.productSizes}>
-                            {props.sizes.map(productSize => {
-                                return <li onClick = {e => sizeHandler(productSize)} style = {{color: productSize === size ? '#F80EE7' : ''}}>
-                                    <span className={classes.productSize} key = {productSize}>{productSize}</span>
-                                </li>
-                            })}
-                        </ul>                       
-                        <ul className={classes.productColors}>                            
-                            {props.colors.map(productColor => {
-                                return <li 
-                                key = {productColor} 
-                                className={classes.productColor}  
-                                style={{ backgroundColor: productColor, border: productColor === color ? 'solid 1px #ffffff' : 'solid 1px ' + productColor}}
-                                onClick = {e => colorHandler(productColor)}                                
-                                >                                     
-                                </li>
-                            })}
-                        </ul>
-                        <p className={classes.productPrice}>$ {props.price.toFixed(2)}</p>
-                    </div>
-                </div>
-            </div>
-            <button className="btn btn-add btn-block" type="button" onClick = {e => addItemHandler()}>Add to cart</button>
-        </div>
+         <Item 
+            item = {props.item} 
+            size = {size} 
+            color = {color}
+            price = {props.price} 
+            colorHandler = {colorHandler} 
+            sizeHandler = {sizeHandler}
+            {...props}
+            >            
+             <button className="btn btn-add btn-block" type="button" onClick = {e => addItemHandler()}>Add to cart</button>
+        </Item>
     )
 }

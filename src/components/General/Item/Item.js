@@ -1,29 +1,12 @@
-import React, {useState} from 'react';
-import classes from './ProductItem.module.css';
-import {cartActions} from '../../../redux/reducers/cart-reducer';
-import {useDispatch} from 'react-redux';
+import React from 'react';
+import classes from './Item.module.css';
 
-export default function ProductItem(props) {
 
-    let [size, setSize] = useState(props.sizes[0]);
-    let [color, setColor] = useState(props.colors[0]);
-    const dispatch = useDispatch()
- 
-    const sizeHandler = (sizeParam) => {
-        setSize(sizeParam)
-    }
-
-    const colorHandler = (colorParam) => {
-        setColor(colorParam)
-    }
-
-    const addItemHandler = (item) => {
-        dispatch(cartActions.addItem({title: props.title, size, color, price: props.price}));
-    }
+export default function Item(props) {
  
     return (
         <div className={classes.productItem}>           
-            <img srcSet= {'assets/img/' + props.images[color]} className={classes.productImage} />
+            <img srcSet= {'assets/img/' + props.images[props.color]} className={classes.productImage} />
             <div className={classes.productInformation}>
                 <h4 className={classes.productTitle}>{props.title}</h4>
                 <div className={classes.productInfoWrapper}>
@@ -35,7 +18,7 @@ export default function ProductItem(props) {
                     <div className={classes.productVariations}>
                         <ul className={classes.productSizes}>
                             {props.sizes.map(productSize => {
-                                return <li onClick = {e => sizeHandler(productSize)} style = {{color: productSize === size ? '#F80EE7' : ''}}>
+                                return <li onClick = {e => props.sizeHandler(productSize)} style = {{color: productSize === props.size ? '#F80EE7' : ''}}>
                                     <span className={classes.productSize} key = {productSize}>{productSize}</span>
                                 </li>
                             })}
@@ -45,8 +28,8 @@ export default function ProductItem(props) {
                                 return <li 
                                 key = {productColor} 
                                 className={classes.productColor}  
-                                style={{ backgroundColor: productColor, border: productColor === color ? 'solid 1px #ffffff' : 'solid 1px ' + productColor}}
-                                onClick = {e => colorHandler(productColor)}                                
+                                style={{ backgroundColor: productColor, border: productColor === props.color ? 'solid 1px #ffffff' : 'solid 1px ' + productColor}}
+                                onClick = {e => props.colorHandler(productColor)}                                
                                 >                                     
                                 </li>
                             })}
@@ -55,7 +38,7 @@ export default function ProductItem(props) {
                     </div>
                 </div>
             </div>
-            <button className="btn btn-add btn-block" type="button" onClick = {e => addItemHandler()}>Add to cart</button>
+            {props.children}             
         </div>
     )
 }
