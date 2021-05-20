@@ -1,0 +1,55 @@
+/* General */
+
+* {
+  margin    : 0;
+  padding   : 0;
+  box-sizing: border-box;
+}
+
+body {
+  line-height     : 1.7;
+  background-color: #121214;
+  font-family     : 'Nunito', sans-serif;
+  font-size       : 1rem;
+}
+
+a {
+  text-decoration: none;
+  color          : inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+
+/* Utils */
+
+.container {
+  max-width: 800px;
+  margin   : 0 auto;
+  overflow : auto;
+}
+
+.btn {
+  border : none;
+  outline: none;
+  padding: 1em 2em;
+  transition: .3s ease-in-out all;
+}
+
+.btn.btn-block {
+  display: block;
+  width  : 100%;
+}
+
+.btn.btn-add {
+  background-color: #FF0DED;
+  color           : #fff;
+}
+
+.btn:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+

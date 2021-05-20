@@ -1,0 +1,115 @@
+
+.productItem {
+    background-color: #282F36;
+    border-radius   : 8px;
+    padding         : .8rem 1.3rem 1.3rem;
+    color           : #fff;
+    font-size       : .8rem;
+
+}
+
+.productItem ul li:hover{
+    cursor: pointer;
+}
+
+.productItem .productImage {
+    margin-top: .5rem;
+    height    : 200px;
+    width     : 200px;
+    object-fit: cover;
+}
+
+.productItem .productTitle {
+    font-weight  : 600;
+    font-size    : 1rem;
+    margin-top   : .5rem;
+    margin-bottom: .9rem;
+
+}
+
+.productItem .productSubtitle {
+    color  : #B5BEC8;
+    display: inline-block;
+}
+
+.productItem .productInfoWrapper {
+    display        : flex;
+    gap            : .4rem;
+    justify-content: start;
+    align-items    : start;
+    margin-bottom  : .2rem;
+}
+
+ 
+.productItem .productSubtitles > *
+{
+    margin-bottom: 1rem;
+}
+
+
+.productItem .productVariations > *{
+    margin-bottom: 14px;
+}
+
+.productItem .productSubtitles > *{
+    display: block;
+}
+
+.productItem .productSubtitles{
+    margin-right: .5rem;
+}
+ 
+.productItem .productSizes {
+    display: flex;
+    gap    : .8rem;
+
+}
+  
+.productItem .productSizes li {
+    background-color: #fff;
+    color           : #121214;
+    width           : 25px;
+    text-align      : center;
+    height          : 20px;
+
+}
+
+.productItem .productSizes li .productSize {
+
+    display    : inline-block;
+    font-size  : .7rem;
+    font-weight: 700;
+}
+
+.productItem .productColors {
+    display: flex;
+    gap    : .8rem;
+}
+
+.productItem .productColors li {
+    padding      : .8rem;
+    border-radius: 25px;
+}
+
+/* .productItem .productColors li:first-child {
+    background-color: #C9BF2F;
+}
+.productItem .productColors li:nth-child(2) {
+    background-color: #64CBB6;
+}
+.productItem .productColors li:nth-child(3) {
+    background-color: #5E2337;
+}
+.productItem .productColors li:nth-child(4) {
+    background-color: #0E0E0E;
+}
+  */
+
+
+@media screen and (max-width: 900px) {
+     
+    .productItem> .productImage{
+        display: block;
+        margin:auto;
+    }
+  }

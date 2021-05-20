@@ -1,0 +1,28 @@
+
+.productsNav {
+    display        : flex;
+    justify-content: space-between;
+    margin-bottom  : 1.5rem;
+}
+
+.productsNav .productSearch,
+.productsNav .productSort {
+    padding         : .5rem .7rem;
+    background-color: #282F36;
+    color           : #B5BEC8;
+    border          : 0;
+    outline         : none;
+
+}
+
+.productsNav .productSearch {
+    width: 250px;
+}
+
+.productsNav .productSort {
+    width: 150px;
+}
+
+.productsNav .productSort:hover {
+    cursor: pointer;
+}

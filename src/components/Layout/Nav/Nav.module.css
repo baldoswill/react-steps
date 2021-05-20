@@ -1,0 +1,22 @@
+
+/* main-nav */
+
+.nav .logoDot{
+    background-color: #F900E6;
+    padding      : .2rem;
+    border-radius: 25px;
+    display: inline-block;
+    margin-left: 2px;
+}
+
+.nav {
+    background-color: #282F36;
+    padding         : .5rem 0;
+    color           : #fff;
+}
+
+.nav div {
+    display        : flex;
+    justify-content: space-between;
+    align-items    : center;
+}
