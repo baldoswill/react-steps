@@ -9,8 +9,6 @@ export default function ProductItem(props) {
     let [color, setColor] = useState(props.colors[0]);
     const dispatch = useDispatch()
  
-    
-
     const sizeHandler = (sizeParam) => {
         setSize(sizeParam)
     }
