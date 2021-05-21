@@ -5,7 +5,7 @@ const cartSlice = createSlice({
     initialState: {items: [], totalQuantity: 0, totalPrice: 0},
     reducers: {
         addItem(state, action){      
-            console.log(action.payload)       
+               
             state.items.push({
                 title: action.payload.title,
                 size: action.payload.size,
@@ -18,7 +18,7 @@ const cartSlice = createSlice({
             state.totalPrice += action.payload.price;
         },
         removeItem(state, action){
-            console.log(action.payload.id);
+          
             const existingItem = state.items.find(item => item.id === action.payload);
             if(existingItem){
                 state.items = state.items.filter(item => item.id !== action.payload);
