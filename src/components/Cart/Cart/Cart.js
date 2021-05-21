@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 export default function Products(props) {
 
     let items = useSelector(state => state.cartReducer.items);
-console.log(items)
+ 
     if(items.length < 1){
         items =   <h4 className = {classes.emptyCart}>Empty Cart</h4>;                                  
     }else{
