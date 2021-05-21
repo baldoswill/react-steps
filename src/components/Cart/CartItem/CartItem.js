@@ -1,12 +1,31 @@
 import React, {useState} from 'react';
-import classes from './CartItem.module.css';
+import Item from '../../General/Item/Item';
+ 
  
 
 export default function CartItem(props) {
- 
- 
-    return (
+  
+    let [size, setSize] = useState(props.sizes[0]);
+    let [color, setColor] = useState(props.colors[0]);
+   
+    const sizeHandler = (sizeParam) => {
+        setSize(sizeParam)
+    }
+
+    const colorHandler = (colorParam) => {
+        setColor(colorParam)
+    }
         
-        <div></div>
+    return (
+        <Item 
+        item = {props.item} 
+        size = {size} 
+        color = {color}
+        price = {props.price} 
+        colorHandler = {colorHandler} 
+        sizeHandler = {sizeHandler}
+        {...props}
+        >                    
+    </Item>
     )
 }
