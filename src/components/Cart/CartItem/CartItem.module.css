@@ -5,13 +5,21 @@
     padding         : .8rem 1.3rem 1.3rem;
     color           : #fff;
     font-size       : .8rem;
-
+    position: relative;
 }
 
-.productItem ul li:hover{
+.productItem .deleteIcon{
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    transition: .3s ease-in-out all;
+}
+
+.productItem .deleteIcon:hover{
     cursor: pointer;
+    opacity: .7;
 }
-
+ 
 .productItem .productImage {
     margin-top: .5rem;
     height    : 200px;
