@@ -4,4 +4,12 @@
     gap                  : 1rem;
 }
 
+.cart .emptyCart{
+    color: #fff;
+    height: 80vh;
+    display: flex;
+   
+    align-items: center;
+    justify-content: center;
+}
  
