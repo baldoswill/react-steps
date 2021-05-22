@@ -36,8 +36,8 @@ export default function ProductItem(props) {
                         <div className={classes.productVariations}>
                             <ul className={classes.productSizes}>
                                 {props.sizes.map(productSize => {
-                                    return <li onClick = {e => sizeHandler(productSize)} style = {{color: productSize === size ? '#F80EE7' : ''}}>
-                                        <span className={classes.productSize} key = {productSize}>{productSize}</span>
+                                    return <li onClick = {e => sizeHandler(productSize)} style = {{color: productSize === size ? '#F80EE7' : ''}} key = {productSize}>
+                                        <span className={classes.productSize} >{productSize}</span>
                                     </li>
                                 })}
                             </ul>                       

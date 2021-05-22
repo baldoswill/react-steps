@@ -5,13 +5,21 @@ import {useDispatch} from 'react-redux';
 
 export default function ProductsNav() {
 
-    let [searchText, setSearchText] = useState('');
     const dispatch = useDispatch();
 
     const searchHandler = (e) => {
-        if(e.key === 'Enter'){
+
+        if(e.keyCode === 13){  
             
-            dispatch(productsActions.searchProduct(searchText));         
+            dispatch(productsActions.searchProduct(e.target.value));         
+        }  
+    }
+
+    const searchHandlerByTyping = (e) => {
+        
+        if(e.target.value.length > 2){ 
+            console.log(e.target.value)             
+            dispatch(productsActions.searchProduct(e.target.value));         
         }  
     }
 
@@ -21,7 +29,8 @@ export default function ProductsNav() {
             name="product-search" 
             className={classes.productSearch} 
             placeholder="Search for shoes" 
-                  
+            onKeyDown = {e => searchHandler(e)}
+            onChange = {e => searchHandlerByTyping(e)}
             />
             <select name="" className={classes.productSort}>
                 <option value="low-price">Lowest Price</option>
