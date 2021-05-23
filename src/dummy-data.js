@@ -1,5 +1,5 @@
 export const dummyProducts = [{
-	id: 1,
+	key: 1,
 	images: {
 		'#20426B': 'shoe2-20426B.png',
 		'#BEE441': 'shoe2-BEE441.png',
@@ -13,7 +13,7 @@ export const dummyProducts = [{
 
 },
 {
-	id: 2,
+	key: 2,
 	images: {
 		'#0E0E0E': 'shoe1-0E0E0E.png',
 		'#5E2337': 'shoe1-5E2337.png',
@@ -27,7 +27,7 @@ export const dummyProducts = [{
 	dateCreated: 1497687730846
 },
 {
-	id: 3,
+	key: 3,
 	images: {
 		'#0071C2': 'shoes-c2-0071C2.png',
 		'#28858A': 'shoes-c2-28858A.png',

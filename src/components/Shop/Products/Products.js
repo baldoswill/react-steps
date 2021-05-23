@@ -2,8 +2,10 @@ import React, {useEffect,useState} from 'react';
 import classes from './Products.module.css';
 import ProductItem from '../ProductItem/ProductItem';
 import {useSelector} from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+
  
-export default function Products(props) {
+export default function Products() {
     const productItems = useSelector(state => state.productsReducer.products);
     const [products, setProducts] = useState([]);
     
@@ -13,11 +15,13 @@ export default function Products(props) {
     }, [productItems]);
 
     return (
+        
         <div className = {classes.products}>
+           
             {
                 products && products.map(product => {
                     return <ProductItem 
-                    key = {product.id}
+                    key = {uuidv4()}
                     title = {product.title} 
                     sizes = {product.sizes} 
                     colors = {product.colors}

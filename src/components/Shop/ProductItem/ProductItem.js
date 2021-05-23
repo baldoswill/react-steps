@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import {cartActions} from '../../../redux/reducers/cart-reducer';
 import {useDispatch} from 'react-redux';
 import classes from './ProductItem.module.css';
@@ -18,8 +19,8 @@ export default function ProductItem(props) {
         setColor(colorParam)
     }
 
-    const addItemHandler = (item) => {        
-        dispatch(cartActions.addItem({title: props.title, size, color, price: props.price, image:  props.images[color], id: props.id}));
+    const addItemHandler = () => {        
+        dispatch(cartActions.addItem({title: props.title, size, color, price: props.price, image:  props.images[color], id: uuidv4()}));
     }
  
     return (       

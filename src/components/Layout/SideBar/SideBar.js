@@ -14,7 +14,7 @@ export default function SideBar(props) {
             </div>
             <div className={classes.sideBarWrapper}>
                 <div className={classes.totalPrice}>
-                    <p className={classes.total}>Total: $ {totalPrice.toFixed(2)}</p>
+                    <p className={classes.total}>Total: $ {Math.abs(totalPrice).toFixed(2)}</p>
                 </div>
             </div>
         </div>
