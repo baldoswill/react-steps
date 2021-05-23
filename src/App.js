@@ -14,16 +14,16 @@ function App() {
 	const dispatch = useDispatch();
 	const isShowSideBar = useSelector(state => state.uiReducer.isShowSideBar);
 	const searchItemFound = useSelector(state => state.productsReducer.searchItemFound);
-	const sorted = useSelector(state => state.productsReducer.sorted);
-	const products = useSelector(state => state.productsReducer.products);
 
 	useEffect(() => {		
-		if(!searchItemFound && !sorted){
+			
+
+		if(!searchItemFound ){
 			dispatch(productsActions.loadProducts(dummyProducts));
-		}		
+		}
 
 		
-	}, [searchItemFound, products, sorted]);
+	}, [searchItemFound]);
 
 	
 

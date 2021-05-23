@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function ProductsNav() {
 
     const dispatch = useDispatch();
-    const products = useSelector(state => state.productsReducer.products);
 
     const searchHandler = (e) => {
         dispatch(productsActions.searchProduct(e.target.value));

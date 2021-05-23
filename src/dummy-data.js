@@ -25,7 +25,6 @@ export const dummyProducts = [{
 	colors: ['#0E0E0E', '#5E2337', '#64CBB6', '#C9BF2F'],
 	price: 31.23,
 	dateCreated: 1497687730846
-
 },
 {
 	id: 3,
