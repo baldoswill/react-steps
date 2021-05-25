@@ -1,0 +1,30 @@
+.paging{
+    display: grid;
+    place-items: center;    
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.paging .pages{
+    border: 1px solid #282F36;
+}
+
+.paging .pages .page{
+    padding: .5rem 1rem;
+    color: #fff;
+    border-right: 1px solid #282F36;
+    display: inline-block;
+    font-size: .7rem;
+    transition: .2s ease-in-out all;
+}
+
+.paging .pages .page:last-child{
+    border-right: none;
+}
+
+.paging .pages .page:hover{
+    background-color: #fff;
+    color: #121214;
+    cursor: pointer;
+    font-weight: bold;
+}

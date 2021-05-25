@@ -14,16 +14,13 @@ function App() {
 	const dispatch = useDispatch();
 	const isShowSideBar = useSelector(state => state.uiReducer.isShowSideBar);
 	const searchItemFound = useSelector(state => state.productsReducer.searchItemFound);
-
-	useEffect(() => {		
-			
-
-		if(!searchItemFound ){
+	const changedPage = useSelector(state => state.productsReducer.changedPage);
+	
+	useEffect(() => {			
+		if(!searchItemFound){
 			dispatch(productsActions.loadProducts(dummyProducts));
 		}
-
-		
-	}, [searchItemFound]);
+	}, [searchItemFound, changedPage]);
 
 	
 
@@ -36,6 +33,7 @@ function App() {
 			<Main>
 				<ProductsNav />
 				<Products />
+				
 			</Main>
 		</>
 	);
