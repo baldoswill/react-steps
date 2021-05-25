@@ -31,7 +31,8 @@ const productsSlice = createSlice({
             state.perPage = paging.per_page;
             state.totalPages = paging.total_pages;
         },
-        searchProduct(state, action){          
+        searchProduct(state, action){     
+           
             if(action.payload && state.products.length > 0){ 
                 state.searchCounter++;
                 const searchQuery = new RegExp(action.payload, 'i')

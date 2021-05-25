@@ -15,6 +15,7 @@ function App() {
 	const isShowSideBar = useSelector(state => state.uiReducer.isShowSideBar);
 	const searchItemFound = useSelector(state => state.productsReducer.searchItemFound);
 	const changedPage = useSelector(state => state.productsReducer.changedPage);
+ 
 	
 	useEffect(() => {			
 		if(!searchItemFound){
