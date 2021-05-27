@@ -9,6 +9,7 @@ const paginator = (items, page, per_page) => {
    
     paginatedItems = items.slice(offset).slice(0, per_page),
     total_pages = Math.ceil(items.length / per_page);
+
     return {
     page: page,
     per_page: per_page,
@@ -22,9 +23,10 @@ const paginator = (items, page, per_page) => {
 
 const productsSlice = createSlice({
     name: 'products',
-    initialState: {products: [], searchItemFound: false, sorted: false, currentPage: 1, perPage: 2, totalPages: 1, changedPage: 0},
+    initialState: {products: [], searchItemFound: false, sorted: false, currentPage: 1, perPage: 2, totalPages: 1, changedPage: 0, untouchedProducts: []},
     reducers:{     
-        loadProducts(state, action){     
+        loadProducts(state, action){    
+            state.untouchedProducts = action.payload;
             const paging = paginator(action.payload, state.currentPage, state.perPage);
             state.products = paging.data;
             state.currentPage = paging.page;
@@ -33,10 +35,10 @@ const productsSlice = createSlice({
         },
         searchProduct(state, action){     
            
-            if(action.payload && state.products.length > 0){ 
+            if(action.payload && state.untouchedProducts.length > 0){ 
                 state.searchCounter++;
                 const searchQuery = new RegExp(action.payload, 'i')
-                let productsResult =  state.products.filter(product => {                          
+                let productsResult =  state.untouchedProducts.filter(product => {                          
                     return product.title.search(searchQuery) > -1;
                 });
 
