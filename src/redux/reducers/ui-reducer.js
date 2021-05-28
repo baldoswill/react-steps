@@ -2,11 +2,16 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const uiSlice = createSlice({
     name: 'ui',
-    initialState: {isShowSideBar: false},
+    initialState: {isShowSideBar: false, isShowNotification: false, notificationTitle: '', notificationMessage: '', notificationType: ''},
     reducers:{
         toggleSideBar(state){
-            console.log('turn it off');
             state.isShowSideBar = !state.isShowSideBar;
+        },
+        showNotification(state, action){
+            state.notificationTitle = action.payload.notificationTitle;
+            state.notificationMessage = action.payload.notificationMessage;
+            state.notificationType = action.payload.notificationType;
+            state.isShowNotification = action.payload.isShowNotification;
         }
     }
 });

@@ -1,0 +1,35 @@
+.notification{
+    
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 3rem;
+    animation: fadeInOut 1s;
+}
+
+.title{
+    font-weight: bold;
+}
+
+.success{
+    background-color: #00EE4D;
+}
+
+.loading{
+    background-color: #0086C7;
+}
+
+.error{
+    background-color: #D83D21;
+}
+
+.message{
+    font-size: .9rem;
+}
+
+@keyframes fadeInOut {
+    0%   {opacity: 0;}
+   
+    100% {opacity: 1;}
+  }
