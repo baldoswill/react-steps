@@ -4,6 +4,7 @@ import { cartActions } from '../../../redux/reducers/cart-reducer';
 import { uiActions } from '../../../redux/reducers/ui-reducer';
 import { useDispatch } from 'react-redux';
 import classes from './ProductItem.module.css';
+import {addItemToCart} from '../../../redux/actions/cart-action';
 
 export default function ProductItem(props) {
 
@@ -20,32 +21,12 @@ export default function ProductItem(props) {
     }
 
     const addItemHandler = () => {
-        dispatch(cartActions.addItem({
+     
+        dispatch(addItemToCart({
             title: props.title, size, color, price: props.price,
             image: props.images[color],
             id: uuidv4()
-        }));
-
-        dispatch(uiActions.showNotification({
-            notificationTitle: 'Success',
-            notificationMessage: 'Successfully added item',
-            notificationType: 'success',
-            isShowNotification: true
-        }));
-
-
-        setTimeout(() => {
-            dispatch(uiActions.showNotification({
-                notificationTitle: '',
-                notificationMessage: '',
-                notificationType: '',
-                isShowNotification: false
-            }));
-        }, 4000);
-
-       
-
-
+        }))
 
     }
 
