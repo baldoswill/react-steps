@@ -1,18 +1,14 @@
 import React from 'react';
 import classes from './CartItem.module.css';
-import {cartActions} from '../../../redux/reducers/cart-reducer';
-import { removeItem } from '../../../redux/actions/cart-action';
+ import { removeItem } from '../../../redux/actions/cart-action';
 import {useDispatch} from 'react-redux';
 
-export default function CartItem(props) {
- 
+export default function CartItem(props) {     
     const dispatch = useDispatch();
 
-    const deleteHandler = (id) => {
-        dispatch(cartActions.removeItem(id));
-        dispatch(removeItem())
+    const deleteHandler = (id) => {   
+        dispatch(removeItem(id))
     }
-
     return (
         <div className={classes.productItem}>
             <i className={"fas fa-times " + classes.deleteIcon} onClick = {e => deleteHandler(props.id)}></i>

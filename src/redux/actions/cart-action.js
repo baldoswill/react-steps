@@ -5,8 +5,14 @@ import { uiActions } from '../reducers/ui-reducer';
 export const getItemsFromCart = () =>{
     return async (dispatch) => {
         try{
-            const resp = await axios.get("https://react-steps-default-rtdb.firebaseio.com/cart.json");            
-            dispatch(cartActions.fillCart(Object.values(resp.data)));
+            const resp = await axios.get("https://react-steps-default-rtdb.firebaseio.com/cart.json");      
+            const ids = Object.keys(resp.data);
+            const items = Object.values(resp.data);
+
+            for (let index = 0; index < items.length; index++) {
+                items[index].id = ids[index];                
+            }
+            dispatch(cartActions.fillCart(items));
         }catch(e){
             dispatch(uiActions.showNotification({
                 notificationTitle: 'Error',
@@ -38,7 +44,7 @@ export const addItemToCart = (item) => {
             }));
 
             const resp = await axios.post("https://react-steps-default-rtdb.firebaseio.com/cart.json", item);
-
+ 
             if (resp.status === 200) {
                 dispatch(uiActions.showNotification({
                     notificationTitle: 'Success',
@@ -46,6 +52,7 @@ export const addItemToCart = (item) => {
                     notificationType: 'success',
                     isShowNotification: true
                 }));
+                item.id = resp.data.name;
                 dispatch(cartActions.addItem(item));        
             }
         } catch (e) {
@@ -71,7 +78,9 @@ export const addItemToCart = (item) => {
 export const removeItem = (id) => {
     return async(dispatch) => {
         try {
-            const resp = await axios.delete("https://react-steps-default-rtdb.firebaseio.com/cart.json?equalTo=309bb3cc-44cb-4b92-927a-4b3527911efe");
+   
+            const resp = await axios.delete(`https://react-steps-default-rtdb.firebaseio.com/cart/${id}.json`);
+            dispatch(cartActions.removeItem(id));
         } catch (error) {
             
         }
