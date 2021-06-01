@@ -6,8 +6,12 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: {items: [], totalQuantity: 0, totalPrice: 0},
     reducers: {
-        addItem(state, action){ 
-                              ;
+        fillCart(state, action){         
+            state.items = action.payload;
+            state.totalQuantity = state.items.length;           
+            state.totalPrice = state.items.reduce((sum, item) => sum + parseFloat(item.price), 0);
+        },
+        addItem(state, action){                               
             state.items.push({
                 title: action.payload.title,
                 size: action.payload.size,

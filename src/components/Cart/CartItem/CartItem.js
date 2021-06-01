@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './CartItem.module.css';
 import {cartActions} from '../../../redux/reducers/cart-reducer';
+import { removeItem } from '../../../redux/actions/cart-action';
 import {useDispatch} from 'react-redux';
 
 export default function CartItem(props) {
@@ -9,6 +10,7 @@ export default function CartItem(props) {
 
     const deleteHandler = (id) => {
         dispatch(cartActions.removeItem(id));
+        dispatch(removeItem())
     }
 
     return (

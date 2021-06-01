@@ -9,8 +9,8 @@ export default function Products(props) {
  
     if(items.length < 1){
         items =   <h4 className = {classes.emptyCart}>Empty Cart</h4>;                                  
-    }else{
-        items = items.map(product => {
+    }else{       
+        items = items.map(product => {         
             return <CartItem 
             id = {product.id}
             title = {product.title} 
@@ -18,8 +18,8 @@ export default function Products(props) {
             color = {product.color}
             price = {product.price}
             image = {product.image}
-            /> 
-            
+            key = {product.id}
+            />             
         });
     }
     
