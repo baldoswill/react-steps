@@ -1,11 +1,26 @@
 import axios from 'axios';
+import React, {useState} from 'react';
 import { cartActions } from '../reducers/cart-reducer';
 import { uiActions } from '../reducers/ui-reducer';
 
-export const getItemsFromCart = () =>{
+export const getItemsFromCart = (pageNumber) =>{
     return async (dispatch) => {
+
+        const [loading, setLoading] = useState(false);
+        const [error, setError] = useState(false);
+        const [books, setBooks] = useState(false);
+        const [hasMore, setHasMore] = useState(0);
+
         try{
-            const resp = await axios.get("https://react-steps-default-rtdb.firebaseio.com/cart.json");      
+            // const resp = await axios.get("https://react-steps-default-rtdb.firebaseio.com/cart.json");   
+            setLoading(true);
+            let cancel;   
+            const resp = axios({
+                method: 'GET',
+                url: "https://react-steps-default-rtdb.firebaseio.com/cart.json",
+                params: {page: pageNumber},
+                cancelToken: new axios.CancelToken(c => cancel = c)
+            })
             const ids = Object.keys(resp.data);
             const items = Object.values(resp.data);
 
@@ -13,6 +28,8 @@ export const getItemsFromCart = () =>{
                 items[index].id = ids[index];                
             }
             dispatch(cartActions.fillCart(items));
+            setHasMore(items.length > 0);
+            setLoading(false);
         }catch(e){
             dispatch(uiActions.showNotification({
                 notificationTitle: 'Error',
@@ -20,6 +37,8 @@ export const getItemsFromCart = () =>{
                 notificationType: 'error',
                 isShowNotification: true
             }));
+            if(axios.isCancel(error)) return;
+            setError(true);
         }
 
         setTimeout(() => {
@@ -30,6 +49,8 @@ export const getItemsFromCart = () =>{
                 isShowNotification: false
             }));
         }, 4000);
+
+        
     }
 }
 
