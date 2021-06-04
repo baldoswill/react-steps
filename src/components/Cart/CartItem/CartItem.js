@@ -10,7 +10,7 @@ export default function CartItem(props) {
         dispatch(removeItem(id))
     }
     return (
-        <div className={classes.productItem}>
+        <div className={classes.productItem} ref = {props.lastItemRef}>
             <i className={"fas fa-times " + classes.deleteIcon} onClick = {e => deleteHandler(props.id)}></i>
             <img srcSet={'assets/img/' + props.image} className={classes.productImage} />
             <div className={classes.productInformation}>

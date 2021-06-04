@@ -4,7 +4,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
     name: 'cart',
-    initialState: {items: [], totalQuantity: 0, totalPrice: 0, hasMore: false, error: false, loading: false},
+    initialState: {items: [], totalQuantity: 0, totalPrice: 0, hasMore: 0, error: false, loading: false},
     reducers: {
         fillCart(state, action){         
             state.items = action.payload;

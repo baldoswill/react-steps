@@ -1,34 +1,32 @@
-import React, {useState, useState} from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import classes from './Cart.module.css';
 import CartItem from '../CartItem/CartItem';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import { getItemsFromCart } from '../../../redux/actions/cart-action';
 
-
-let initialLoad = true;
- 
 export default function Products(props) {
 
     const [pageNumber, setPageNumber] = useState(1);
+    let lastIndexRef = useRef(3);
+    const dispatch = useDispatch();
 
     let items = useSelector(state => state.cartReducer.items);
     let hasMore = useSelector(state => state.cartReducer.hasMore);
-    let loading = useSelector(state => state.cartReducer.loading);
-    
+    let loading = useSelector(state => state.cartReducer.loading);    
  
-    useEffect(() => {
-		if(initialLoad){
-			dispatch(getItemsFromCart(pageNumber));
-		}				
-	}, [pageNumber]);
+    useEffect(() => {	
+		dispatch(getItemsFromCart(pageNumber, lastIndexRef.current));						
+	}, [pageNumber, lastIndexRef.current]);
 
     const observer = useRef();
 	const lastItemRef = useCallback(node => {
+        
 		if(loading) return
 		if(observer.current) observer.current.disconnect();
 		observer.current = new IntersectionObserver(entries => {
-			if(entries[0].isIntersecting && hasMore){
-				setPageNumber(prevPageNumber => prevPageNumber + 1);
+			if(entries[0].isIntersecting && hasMore > 0){
+				setPageNumber(prevPageNumber => lastIndexRef.current + 1);
+                lastIndexRef.current = lastIndexRef.current + 3;
 			}
 		});
 
@@ -36,14 +34,15 @@ export default function Products(props) {
 
 	}, [loading, hasMore]);
 
+
     if(items.length < 1){
         items =   <h4 className = {classes.emptyCart}>Empty Cart</h4>;                                  
     }else{       
-        items = items.map(product => {   
-            
-            if(items.length === index + 1){                 
+        items = items.map((product, index) => {               
+            if(items.length === index + 1){      
+                                        
                 return <CartItem 
-                ref = {lastItemRef}
+                lastItemRef = {lastItemRef}
                 id = {product.id}
                 title = {product.title} 
                 size = {product.size} 
@@ -53,6 +52,7 @@ export default function Products(props) {
                 key = {product.id}
                 />    
             }else{
+              
                 return <CartItem 
                 id = {product.id}
                 title = {product.title} 
@@ -70,7 +70,7 @@ export default function Products(props) {
   
     return (
         <div className = {classes.cart}>
-            {items}                  
+            {items}                                    
         </div>
     )
 }

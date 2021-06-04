@@ -1,18 +1,24 @@
 import axios from 'axios';
-import React, {useState} from 'react';
+
 import { cartActions } from '../reducers/cart-reducer';
 import { uiActions } from '../reducers/ui-reducer';
 
-export const getItemsFromCart = (pageNumber) =>{
+export const getItemsFromCart = (pageNumber, lastIndexRef) =>{
     return async (dispatch) => {
- 
-        try{
-            // const resp = await axios.get("https://react-steps-default-rtdb.firebaseio.com/cart.json");   
+        console.log(pageNumber);
+        try{ 
             dispatch(cartActions.setLoading(true));
-            let cancel;   
-            const resp = axios({
+            let cancel;  
+
+            const respForAllRows = await axios({
                 method: 'GET',
                 url: "https://react-steps-default-rtdb.firebaseio.com/cart.json",
+                cancelToken: new axios.CancelToken(c => cancel = c)
+            }) 
+            
+            const resp = await axios({
+                method: 'GET',
+                url: `https://react-steps-default-rtdb.firebaseio.com/cart.json?orderBy="$key"&limitToFirst=${lastIndexRef}&startAt="-MbM4fpcNncoLYGi5F-S"`,
                 params: {page: pageNumber},
                 cancelToken: new axios.CancelToken(c => cancel = c)
             })
@@ -21,11 +27,13 @@ export const getItemsFromCart = (pageNumber) =>{
 
             for (let index = 0; index < items.length; index++) {
                 items[index].id = ids[index];                
-            }
+            }            
             dispatch(cartActions.fillCart(items));
-            dispatch(cartActions.setHasMore(items.length > 0));
             dispatch(cartActions.setLoading(false));
+            dispatch(cartActions.setHasMore(Object.keys(respForAllRows.data).length));
+            
         }catch(e){
+            console.log(e)
             dispatch(uiActions.showNotification({
                 notificationTitle: 'Error',
                 notificationMessage: 'Something went wrong',
