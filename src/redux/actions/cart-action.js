@@ -5,15 +5,10 @@ import { uiActions } from '../reducers/ui-reducer';
 
 export const getItemsFromCart = (pageNumber) =>{
     return async (dispatch) => {
-
-        const [loading, setLoading] = useState(false);
-        const [error, setError] = useState(false);
-        const [books, setBooks] = useState(false);
-        const [hasMore, setHasMore] = useState(0);
-
+ 
         try{
             // const resp = await axios.get("https://react-steps-default-rtdb.firebaseio.com/cart.json");   
-            setLoading(true);
+            dispatch(cartActions.setLoading(true));
             let cancel;   
             const resp = axios({
                 method: 'GET',
@@ -28,8 +23,8 @@ export const getItemsFromCart = (pageNumber) =>{
                 items[index].id = ids[index];                
             }
             dispatch(cartActions.fillCart(items));
-            setHasMore(items.length > 0);
-            setLoading(false);
+            dispatch(cartActions.setHasMore(items.length > 0));
+            dispatch(cartActions.setLoading(false));
         }catch(e){
             dispatch(uiActions.showNotification({
                 notificationTitle: 'Error',
@@ -37,8 +32,8 @@ export const getItemsFromCart = (pageNumber) =>{
                 notificationType: 'error',
                 isShowNotification: true
             }));
-            if(axios.isCancel(error)) return;
-            setError(true);
+            if(axios.isCancel(e)) return;      
+            dispatch(cartActions.setError(true));
         }
 
         setTimeout(() => {

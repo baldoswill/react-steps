@@ -8,10 +8,9 @@ import Cart from './components/Cart/Cart/Cart';
 import Notification from './components/Shared/Notification/Notification';
 import { useSelector, useDispatch } from 'react-redux';
 import { productsActions } from './redux/reducers/products-reducer';
-import { getItemsFromCart } from './redux/actions/cart-action';
 import { dummyProducts } from './dummy-data';
 
-let initialLoad = true;
+
 
 function App() {
 
@@ -25,20 +24,13 @@ function App() {
 	const notificationType = useSelector(state => state.uiReducer.notificationType);
 	const isShowNotification = useSelector(state => state.uiReducer.isShowNotification);
 	const isShowSideBar = useSelector(state => state.uiReducer.isShowSideBar);
-
-	useEffect(() => {
-		if(initialLoad){
-			dispatch(getItemsFromCart());
-		}				
-	}, [])
-	
+ 
 	useEffect(async() => {			
 		if(!searchItemFound){
 			dispatch(productsActions.loadProducts(dummyProducts));
 		}
 	}, [searchItemFound, changedPage]);
  
-
 	return (
 		<>
 			{isShowNotification && <Notification title = {notificationTitle} message = {notificationMessage} type = {notificationType}/>}

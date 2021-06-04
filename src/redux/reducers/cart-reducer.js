@@ -4,7 +4,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
     name: 'cart',
-    initialState: {items: [], totalQuantity: 0, totalPrice: 0},
+    initialState: {items: [], totalQuantity: 0, totalPrice: 0, hasMore: false, error: false, loading: false},
     reducers: {
         fillCart(state, action){         
             state.items = action.payload;
@@ -31,6 +31,15 @@ const cartSlice = createSlice({
                 state.totalQuantity--;
                 state.totalPrice -= existingItem.price;
             }                           
+        },
+        setHasMore(state, action){
+            state.hasMore = action.payload;
+        },
+        setError(state, action){
+            state.error = action.payload;
+        },
+        setLoading(state, action){
+            state.loading = action.payload;
         }
     }
 });
