@@ -3,6 +3,7 @@ import classes from './Cart.module.css';
 import CartItem from '../CartItem/CartItem';
 import {useSelector, useDispatch} from 'react-redux';
 import { getItemsFromCart } from '../../../redux/actions/cart-action';
+import Spinner from '../../Shared/Spinner/Spinner';
 
 export default function Products(props) {
 
@@ -16,12 +17,11 @@ export default function Products(props) {
  
     useEffect(() => {	
 		dispatch(getItemsFromCart(pageNumber, lastIndexRef.current));						
-	}, [pageNumber, lastIndexRef.current]);
+	}, [pageNumber]);
 
     const observer = useRef();
-	const lastItemRef = useCallback(node => {
-        
-		if(loading) return
+	const lastItemRef = useCallback(node => {        
+		if(loading) return;
 		if(observer.current) observer.current.disconnect();
 		observer.current = new IntersectionObserver(entries => {
 			if(entries[0].isIntersecting && hasMore > 0){
@@ -32,15 +32,13 @@ export default function Products(props) {
 
 		if(node) observer.current.observe(node)
 
-	}, [loading, hasMore]);
-
+	}, [loading]);
 
     if(items.length < 1){
         items =   <h4 className = {classes.emptyCart}>Empty Cart</h4>;                                  
     }else{       
-        items = items.map((product, index) => {               
-            if(items.length === index + 1){      
-                                        
+        items = items.map((product, index) => {  
+            if(items.length === index + 1 && (items.length + 1) !== hasMore){                      
                 return <CartItem 
                 lastItemRef = {lastItemRef}
                 id = {product.id}
@@ -70,7 +68,8 @@ export default function Products(props) {
   
     return (
         <div className = {classes.cart}>
-            {items}                                    
+            {items} 
+            {loading && hasMore > 0 && <Spinner />}                                   
         </div>
     )
 }

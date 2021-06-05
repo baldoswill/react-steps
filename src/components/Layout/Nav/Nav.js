@@ -8,7 +8,7 @@ import {uiActions} from '../../../redux/reducers/ui-reducer';
 
 export default function Nav() {
 
-    const totalQuantity =  useSelector(state => state.cartReducer.totalQuantity);
+    const totalQuantity =  useSelector(state => state.cartReducer.hasMore);
     const dispatch = useDispatch()
 
     const showSideBarHandler = () => {

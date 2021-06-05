@@ -5,7 +5,7 @@ import { uiActions } from '../reducers/ui-reducer';
 
 export const getItemsFromCart = (pageNumber, lastIndexRef) =>{
     return async (dispatch) => {
-        console.log(pageNumber);
+     
         try{ 
             dispatch(cartActions.setLoading(true));
             let cancel;  
@@ -28,9 +28,10 @@ export const getItemsFromCart = (pageNumber, lastIndexRef) =>{
             for (let index = 0; index < items.length; index++) {
                 items[index].id = ids[index];                
             }            
+            dispatch(cartActions.setHasMore(Object.keys(respForAllRows.data).length));
             dispatch(cartActions.fillCart(items));
             dispatch(cartActions.setLoading(false));
-            dispatch(cartActions.setHasMore(Object.keys(respForAllRows.data).length));
+            
             
         }catch(e){
             console.log(e)
