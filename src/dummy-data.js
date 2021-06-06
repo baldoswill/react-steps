@@ -31,12 +31,12 @@ export const dummyProducts = [{
 	"id": 232353,
 	"key": 232353,
 	"images": {
-		"#0071C2": "shoes-c2-0071C2.png",
-		"#28858A": "shoes-c2-28858A.png",		
+		"#570F1B": "shoe3-570F1B.png",
+		"#B0CDCB": "shoe3-B0CDCB.png",		
 	},
-	"title": "Adobo Shoes",
+	"title": "Nike Joy Ride",
 	"sizes": [7, 8, 9, 10],
-	"colors": ["#0071C2", "#28858A"],
+	"colors": ["#570F1B", "#B0CDCB"],
 	"price": 11.10,
 	"dateCreated": 1521687730846
 }];
