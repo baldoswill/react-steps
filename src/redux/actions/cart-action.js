@@ -34,13 +34,13 @@ export const getItemsFromCart = (pageNumber, lastIndexRef) =>{
             
             
         }catch(e){
-            console.log(e)
-            dispatch(uiActions.showNotification({
-                notificationTitle: 'Error',
-                notificationMessage: 'Something went wrong',
-                notificationType: 'error',
-                isShowNotification: true
-            }));
+            // console.log(e)
+            // dispatch(uiActions.showNotification({
+            //     notificationTitle: 'Error',
+            //     notificationMessage: 'Something went wrong',
+            //     notificationType: 'error',
+            //     isShowNotification: true
+            // }));
             if(axios.isCancel(e)) return;      
             dispatch(cartActions.setError(true));
         }

@@ -38,7 +38,9 @@ export default function Products(props) {
         items =   <h4 className = {classes.emptyCart}>Empty Cart</h4>;                                  
     }else{       
         items = items.map((product, index) => {  
-            if(items.length === index + 1 && (items.length + 1) !== hasMore){                      
+            if(items.length === index + 1 && items.length < hasMore ){      
+                console.log("items ", items.length)                
+                console.log("hasMore", hasMore)                
                 return <CartItem 
                 lastItemRef = {lastItemRef}
                 id = {product.id}

@@ -21,7 +21,9 @@ const cartSlice = createSlice({
                 id: action.payload.id                
             });                  
             state.totalQuantity++;
+            state.hasMore++;
             state.totalPrice += action.payload.price;
+            state.loading=false;
         },
         removeItem(state, action){
             // TODO: Fix remove Item
@@ -29,8 +31,10 @@ const cartSlice = createSlice({
             if(existingItem){
                 state.items = state.items.filter(item => item.id !== action.payload);
                 state.totalQuantity--;
+                state.hasMore--;
                 state.totalPrice -= existingItem.price;
-            }                           
+            }  
+            state.loading=false;                         
         },
         setHasMore(state, action){
             state.hasMore = action.payload;
